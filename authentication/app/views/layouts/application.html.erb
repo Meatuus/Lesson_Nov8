@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Authentication</title>
+		<%= csrf_meta_tags %>
+
+		<%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+		<%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+	</head>
+
+	<body>
+		<% if flash.any? %>
+			<% flash.each do |key, value| %>
+			<!-- #key and value as genetated on controller page in flash -->
+				<p class="<%= key %>">
+					<%= value %>
+				</p>
+				<% end %>
+			<% end %>
+
+		<% if current_user %>
+			<p>Hello <%= current_user.email %> <%= link_to 'Log Out', new_sessions_path %></p>
+		<% else %>
+			<p><%= link_to 'Log In', new_sessions_path %></p>
+		<% end %>
+
+		<%= yield %>
+	</body>
+</html>
